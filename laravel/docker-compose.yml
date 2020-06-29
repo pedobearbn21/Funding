@@ -1,0 +1,49 @@
+version: "3"
+services:
+  funding_main:
+    container_name: funding_main
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 12000:8080
+    volumes:
+      - ./:/app
+      - /app/vendor/
+      - ./public/uploads/:/app/public/uploads/
+    command: >
+      sh -c "php artisan key:generate; php -S 0.0.0.0:8080 -t public;"
+    networks:
+      - app-network
+
+  #MySQL Service
+  funding_db:
+    container_name: funding_db
+    image: mariadb
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE= ${DB_DATABASE}
+      - MYSQL_ROOT_HOST=%
+      - TZ=Asia/Bangkok
+    healthcheck:
+      test: mysql --user=root --password=root
+    networks:
+      - app-network
+
+  funding_pma:
+    container_name: funding_pma
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "12001:80"
+    links:
+      - funding_db:db
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
