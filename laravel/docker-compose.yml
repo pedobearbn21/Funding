@@ -1,24 +1,25 @@
 version: "3"
 services:
-  funding_main:
-    container_name: funding_main
+  main:
+    container_name: main
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - 12000:8080
+      - 4500:8080
     volumes:
       - ./:/app
       - /app/vendor/
       - ./public/uploads/:/app/public/uploads/
     command: >
       sh -c "php artisan key:generate; php -S 0.0.0.0:8080 -t public;"
+      sh -c "npm run dev;"
     networks:
       - app-network
 
   #MySQL Service
-  funding_db:
-    container_name: funding_db
+  db_service:
+    container_name: db_service
     image: mariadb
     restart: always
     volumes:
@@ -33,13 +34,13 @@ services:
     networks:
       - app-network
 
-  funding_pma:
-    container_name: funding_pma
+  pma:
+    container_name: pma
     image: phpmyadmin/phpmyadmin
     ports:
-      - "12001:80"
+      - "4501:80"
     links:
-      - funding_db:db
+      - db_service:db
     networks:
       - app-network
 
