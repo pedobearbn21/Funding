@@ -13,7 +13,6 @@ services:
       - ./public/uploads/:/app/public/uploads/
     command: >
       sh -c "php artisan key:generate; php -S 0.0.0.0:8080 -t public;"
-      sh -c "npm run dev;"
     networks:
       - app-network
 

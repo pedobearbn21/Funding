@@ -27,7 +27,6 @@ RUN apk add --no-cache tzdata \
 COPY database/ database/
 COPY composer.json composer.json
 COPY composer.lock composer.lock
-RUN npm install
 RUN composer install \
     --ignore-platform-reqs \
     --no-interaction \
@@ -37,7 +36,17 @@ RUN composer install \
 COPY . .
 #COPY --from=vendor /app/vendor/ /app/vendor/
 # COPY --from=frontend /app/public /app/public
+
+# node
+# FROM node:12.13-alpine
+
+# COPY package*.json ./
+
+# RUN npm install 
+
+
 # CMD  crond && php artisan serve --host=0.0.0.0 --port=8080
 CMD php artisan key:generate; php artisan serve  --host=0.0.0.0 --port=8080
+
 
 EXPOSE 8080

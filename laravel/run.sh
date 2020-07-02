@@ -1,6 +1,7 @@
 #/bin/sh
 docker-compose down
 docker-compose up -d --build
+# docker-compose exec main php artisan database:create funding
 docker-compose exec main php artisan migrate:refresh
 docker-compose exec main php artisan passport:install --force
 docker-compose exec main php artisan passport:keys --force
