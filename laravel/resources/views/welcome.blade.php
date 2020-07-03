@@ -64,6 +64,7 @@
         </style>
     </head>
     <body>
+        @extends('layouts.app')
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -81,9 +82,11 @@
 
             <div class="content">
             <div id="app">
+            @section('content')
                 <example-component></example-component>
             </div>
             <script type="text/javascript" src="js/app.js"></script>
+            @endsection
             </div>
         </div>
     </body>
