@@ -1,0 +1,49 @@
+version: "3"
+services:
+  api:
+    container_name: api
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 9980:8080
+    volumes:
+      - ./:/app
+      - /app/vendor/
+      - ./public/uploads/:/app/public/uploads/
+    command: >
+      sh -c "php artisan key:generate; php -S 0.0.0.0:8080 -t public;"
+    networks:
+      - app-network
+
+  #MySQL Service
+  db_f:
+    container_name: db_f
+    image: mariadb
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE= ${DB_DATABASE}
+      - MYSQL_ROOT_HOST=%
+      - TZ=Asia/Bangkok
+    healthcheck:
+      test: mysql --user=root --password=root
+    networks:
+      - app-network
+
+  pma_f:
+    container_name: pma_f
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "9830:80"
+    links:
+      - db_f:db
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
