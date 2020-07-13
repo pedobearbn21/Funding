@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container" style="max-width: 100% !important;">
+    <!-- <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
@@ -18,6 +18,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+    <detail-component></detail-component>
 </div>
 @endsection

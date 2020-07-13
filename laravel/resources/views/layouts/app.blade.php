@@ -22,7 +22,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container" style="max-width: 100% !important;">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -75,6 +75,12 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="footer" style="position:absolute !important;bottom:0 !important;height:5% !important;width:100% !important">
+            <div class="container">
+                <span>Footer Page</span>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
