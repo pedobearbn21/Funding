@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::post('project','ProjectController@projectceate');
+// Route::post('projects','ProjectController@store');
+// Route::prefix('api')->group(function () {
+// });
+Route::resource('projects', 'ProjectController');

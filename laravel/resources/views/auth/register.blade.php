@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -61,6 +62,28 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <div class="input-group col-md-6">
+                                <select class="custom-select" onchange="ChangeCompanyForm()" name="role" id="role">
+                                    <option selected>Choose...</option>
+                                    <option value="funding">funding</option>
+                                    <option value="founder">founder</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <label class="input-group-text" for="role">{{ __('Role User') }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+  
+                        <div class="form-group row" id='form_company' style="display:none">
+                            <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('Company') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="company" type="text" class="form-control" name="company" autocomplete="company">
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -68,10 +91,27 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            function ChangeCompanyForm()
+            {
+                var x = document.getElementById('form_company');
+                var y = document.getElementById('role');
+                if (y.value == "founder") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            };
+        </script>
+    @endpush
 </div>
 @endsection
+
+
