@@ -19,6 +19,9 @@
             </div>
         </div>
     </div> -->
-    <detail-component></detail-component>
+    <detail-component :props="json_encode($projects)"></detail-component>
+    @foreach( $projects as $project)
+       {{ $project->id }} : {{ $project->title }} : {{ $project->description }}
+    @endforeach
 </div>
 @endsection

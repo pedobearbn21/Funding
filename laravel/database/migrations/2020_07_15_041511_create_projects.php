@@ -20,6 +20,8 @@ class CreateProjects extends Migration
             $table->integer('minimum');
             $table->integer('counting_funding');
             $table->integer('company_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
