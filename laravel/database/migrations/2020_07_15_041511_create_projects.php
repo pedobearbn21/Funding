@@ -21,6 +21,7 @@ class CreateProjects extends Migration
             $table->integer('counting_funding');
             $table->integer('company_id');
             $table->unsignedBigInteger('user_id');
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
@@ -33,6 +34,6 @@ class CreateProjects extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project');
+        Schema::dropIfExists('projects');
     }
 }

@@ -5,9 +5,11 @@
  */
 
 require('./bootstrap');
-
+import axios from 'axios';
 window.Vue = require('vue');
-
+import VueRouter from 'vue-router';
+Vue.use(VueRouter)
+Vue.prototype.axios = axios;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -29,6 +31,16 @@ Vue.component('bill-page', require('./views/Fundingpage.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+const routes = [
+    { path: '/detail/:id',name:'detail' ,component:  () => import(/* webpackChunkName: "about" */ "./components/DetailComponent.vue") },
+    { path: '', component: () => import(/* webpackChunkName: "about" */  "./views/Homeprojectfunding.vue") }
+]
+
+const router = new VueRouter({
+    routes // short for `routes: routes`
+})
+
 const app = new Vue({
     el: '#app',
+    router,
 });

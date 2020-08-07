@@ -16,7 +16,7 @@
             <input type="number" v-model="fundingcount" class="form-control" placeholder="Funding Count" aria-label="count" aria-describedby="basic-addon1">
         </div>
       </div>
-       <!-- <div class="col-12">
+       <div class="col-12">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">@</span>
@@ -26,7 +26,7 @@
       </div>
       <div class="col-12">
           <button class="btn btn-block" @click="action">Click Funding</button>
-      </div> -->
+      </div>
 
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
     },
     methods: {
         action(){
-            this.axios.post('funding',this.fundingcount).then((res)=>{this.router.push('success')}).catch((err)=>{console.log(err)})
+            this.axios.post('projectsfunding',this.fundingcount).then((res)=>{this.router.push('success')}).catch((err)=>{console.log(err)})
         },
     },
 }

@@ -23,3 +23,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::prefix('api')->group(function () {
 // });
 Route::resource('projects', 'ProjectController');
+Route::post('projectsfunding', 'ProjectController@addFunding');
